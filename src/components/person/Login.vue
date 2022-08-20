@@ -1,5 +1,5 @@
 <template>
-  <form class="card auth-card">
+  <form class="card auth-card grey lighten-4">
     <div class="card-title center">
       <i class="material-icons">login</i>
     </div>
