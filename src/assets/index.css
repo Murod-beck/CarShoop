@@ -1,0 +1,73 @@
+body {
+    background-color: rgb(226, 226, 226);
+}
+.conter {
+    margin: 0 50px 0 50px;
+}
+.apps {
+    font-family: 'Josefin Sans', sans-serif;
+    color: rgb(70, 0, 120);
+}
+.navi {
+    height: 80px;
+}
+img {
+    height: 100%;
+}
+.bgc {
+    background: linear-gradient(#4a1195, rgb(106, 99, 149), rgb(148, 125, 222));
+}
+.color {
+    color: rgb(70, 0, 120);
+}
+.auth-card {
+    padding: 20px;
+}
+.auth-submit {
+    width: 100%;
+}
+.card-image {
+    height: 180px;
+}
+.card-content {
+    min-height: 250px;
+}
+
+
+
+
+
+.btns-card {
+    position: relative;
+}
+  
+.btns {
+    position: absolute;
+    top: -21px;
+    left: 50%;
+    z-index: 100;
+    cursor: pointer;
+}
+  
+.btns span {
+    text-decoration: none;
+    border: 0 none;
+    display: block;
+    height: 54px;
+    width: 200px;
+    margin-left: -100px;
+    background: linear-gradient(#8004e6, rgb(64, 0, 255), rgb(0, 128, 255));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    color: aqua;
+    text-align: center;
+    border-radius: 3px;
+    font: 12px/54px 'raleway-heavy', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
+}
+  
+.btns span:hover {
+    background: linear-gradient(#004463, rgb(0, 255, 145), rgb(0, 50, 99));
+    color: rgb(0, 0, 0);
+}
