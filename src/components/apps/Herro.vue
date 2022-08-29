@@ -90,7 +90,7 @@ export default {
       this.corousels.next();
     }, 5000);
   },
-  beforeDestroy() {
+  destroyed() {
     clearInterval(this.corousels);
     if (this.corousels && this.corousels.destroy) {
       this.corousels.destroy();

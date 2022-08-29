@@ -32,7 +32,7 @@
         >
         <i class="material-icons color">close</i>
       </div>
-      <router-link to="/person" @click="Menu.close()"
+      <router-link to="/user" @click="Menu.close()"
         ><i class="material-icons color">person</i></router-link
       >
       <router-link to="/selected" @click="Menu.close()"

@@ -86,10 +86,16 @@ const routes = [
     component: () => import('../views/Selected.vue'),
   },
   {
-    path: '/person',
-    name: 'Person',
+    path: '/user',
+    name: 'User',
     meta: { layout: 'main', auth: true },
-    component: () => import('../views/Person.vue'),
+    component: () => import('../views/User.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/Admin.vue'),
   },
 ];
 

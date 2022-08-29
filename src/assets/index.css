@@ -23,6 +23,9 @@ img {
 .auth-card {
     padding: 20px;
 }
+.card {
+    margin-top: 25px;
+}
 .auth-submit {
     width: 100%;
 }

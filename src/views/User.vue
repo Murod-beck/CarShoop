@@ -2,7 +2,9 @@
   <div class="conter color">
     <div class="row">
       <div class="col s12 m4 l3">
-        <div class="collection-header center"><h4>User</h4></div>
+        <div class="collection-header center">
+          <h4>{{ name || 'User' }}</h4>
+        </div>
         <div class="collection">
           <a href="#!" class="collection-item" @click="login = true">Kirish</a>
           <a href="#!" class="collection-item" @click="login = false"
@@ -10,6 +12,7 @@
           >
           <a href="#!" class="collection-item">Parolni unitdingizmi</a>
           <a href="#!" class="collection-item">Buyurtmalar tarixi</a>
+          <router-link to="/admin" class="collection-item">Admin</router-link>
         </div>
       </div>
       <div class="col s12 m8 l5">
@@ -17,7 +20,7 @@
         <Register v-else />
       </div>
       <div class="col s12 l4">
-        <div class="card grey lighten-4">
+        <div class="card">
           <div class="card-content">
             <span class="card-title">Yangi Mijozlar Uchun!</span>
             <p>
@@ -36,18 +39,29 @@
 </template>
 
 <script>
-import Login from '../components/person/Login.vue';
-import Register from '../components/person/Register.vue';
+import Login from '../components/user/Login.vue';
+import Register from '../components/user/Register.vue';
 export default {
   name: 'Person',
   created() {},
   data() {
     return {
       login: false,
+      admin: false,
     };
   },
   props: {},
   methods: {},
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo');
+    }
+  },
+  computed: {
+    name() {
+      return this.$store.getters.info.name;
+    },
+  },
   components: { Login, Register },
 };
 </script>

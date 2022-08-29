@@ -23,6 +23,14 @@ export default {
     layout() {
       return (this.$route.meta.layout || 'card') + '-layout';
     },
+    error() {
+      return this.$store.getters.error;
+    },
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || 'Xato');
+    },
   },
   components: { CardLayout, Header, Navbar, Footer },
 };

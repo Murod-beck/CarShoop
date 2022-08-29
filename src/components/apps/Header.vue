@@ -26,7 +26,7 @@
             </div>
           </li>
           <li>
-            <router-link to="/person"
+            <router-link to="/user"
               ><i class="material-icons color">person</i></router-link
             >
           </li>
