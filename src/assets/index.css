@@ -20,6 +20,9 @@ img {
 .color {
     color: rgb(70, 0, 120);
 }
+.text {
+    color: rgb(34, 34, 34);
+}
 .auth-card {
     padding: 20px;
 }
@@ -30,10 +33,10 @@ img {
     width: 100%;
 }
 .card-image {
-    height: 180px;
+    height: 250px;
 }
 .card-content {
-    min-height: 250px;
+    min-height: 200px;
 }
 
 

@@ -5,16 +5,17 @@
         <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
         <Filters />
       </div>
-      <div class="col s12 m4 l3" v-for="product of products" :key="product">
+      <div class="col s12 m4 l3" v-for="cas of cases" :key="cas">
         <div class="card large">
           <div class="card-image">
-            <img :src="require('@/images/' + product.img)" />
+            <img src="@/images/12.jpg" />
           </div>
           <div class="card-content">
-            <span class="card-title">{{ product.title }}</span>
-            <span class="card-title">Narxi: {{ product.sum }}</span>
-            <span class="card-title">Art: {{ product.art }}</span>
-            <p>{{ product.par }}</p>
+            <span class="card-title">{{ cas.name }}</span>
+            <hr />
+            <h6>Narxi: {{ cas.price }} ₽.</h6>
+            <hr />
+            <p>{{ cas.description }}</p>
           </div>
           <hr />
           <div class="card-tabs">
@@ -49,46 +50,17 @@ export default {
   created() {},
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          img: '11.jpg',
-          title: 'Nomi',
-          sum: 100,
-          art: 113,
-          par: 'I am a very simple card. I am a very simple card.I am good at containing small bits of information. I am convenient because I require ',
-        },
-        {
-          id: 2,
-          img: '12.jpg',
-          title: 'Nomi',
-          sum: 300,
-          art: 213,
-          par: 'I am a very simple card. I am good at containing small bits of information require ',
-        },
-        {
-          id: 3,
-          img: '13.jpg',
-          title: 'Nomi',
-          sum: 300,
-          art: 313,
-          par: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require ',
-        },
-        {
-          id: 4,
-          img: '14.jpg',
-          title: 'Nomi',
-          sum: 400,
-          art: 414,
-          par: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require ',
-        },
-      ],
+      cases: [],
     };
   },
   props: {},
   methods: {},
+  async mounted() {
+    this.cases = await this.$store.dispatch('fetchProduct');
+    console.log(this.cases);
+  },
   components: { Filters },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

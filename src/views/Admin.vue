@@ -7,10 +7,10 @@
             <h4>Admin</h4>
           </div>
           <div class="collection">
-            <a href="#!" class="collection-item" @click="update = true"
+            <a href="#tahrirlash" class="collection-item" @click="update = true"
               >Yuklash</a
             >
-            <a href="#!" class="collection-item" @click="update = false"
+            <a href="#yuklash" class="collection-item" @click="update = false"
               >Tahrirlash</a
             >
           </div>
