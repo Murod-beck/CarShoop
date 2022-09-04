@@ -12,7 +12,7 @@
           </div>
           <div class="card-content">
             <span class="card-title">{{ cas.name }}</span>
-            <hr />
+
             <h6>Narxi: {{ cas.price }} ₽.</h6>
             <hr />
             <p>{{ cas.description }}</p>
@@ -21,7 +21,7 @@
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
-                <a class="waves-effect"
+                <a class="waves-effect" @click="addCart(cas)"
                   ><i class="material-icons color">add_shopping_cart</i></a
                 >
               </li>
@@ -54,10 +54,13 @@ export default {
     };
   },
   props: {},
-  methods: {},
+  methods: {
+    addCart(item) {
+      this.$store.dispatch('addCarts', item);
+    },
+  },
   async mounted() {
     this.cases = await this.$store.dispatch('fetchProduct');
-    console.log(this.cases);
   },
   components: { Filters },
 };
