@@ -4,6 +4,12 @@
       <div class="col s12 m6 l3">
         <div class="collection-header center">
           <h4>Korzinka</h4>
+          <div class="collection">
+            <a href="#!" class="collection-item">
+              Xisob
+              <h4 class="badge">1</h4></a
+            >
+          </div>
         </div>
       </div>
       <CartList :items="cart" @deletCart="deletCart" />
@@ -26,6 +32,7 @@ export default {
       this.$store.dispatch('deletCarts', index);
     },
   },
+  mounted() {},
   computed: {
     ...mapGetters(['cart']),
   },

@@ -31,6 +31,7 @@
       </div>
     </div>
   </div>
+  <div>xisob{{ cartTotal }}</div>
 </template>
 
 <script>
@@ -48,7 +49,19 @@ export default {
       },
     },
   },
-  mounted() {},
+  computed: {
+    cartTotal() {
+      let result = [];
+      for (let item of this.items) {
+        result.push(item.price * item.article);
+      }
+      result.reduce(function (sum, el) {
+        return sum + el;
+      });
+      console.log(result);
+      return result;
+    },
+  },
   methods: {
     deleteCart(index) {
       this.$emit('deletCart', index);
