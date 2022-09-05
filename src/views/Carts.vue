@@ -4,11 +4,9 @@
       <div class="col s12 m6 l3">
         <div class="collection-header center">
           <h4>Korzinka</h4>
-          <div class="collection">
-            <a href="#!" class="collection-item">
-              Xisob
-              <h4 class="badge">1</h4></a
-            >
+          <div class="collection white">
+            <h5>Umumiy qiymat</h5>
+            <h4 class="badge">{{ totalCart }} ₽.</h4>
           </div>
         </div>
       </div>
@@ -35,6 +33,21 @@ export default {
   mounted() {},
   computed: {
     ...mapGetters(['cart']),
+    totalCart() {
+      let result = [];
+
+      if (this.cart.length) {
+        for (let item of this.cart) {
+          result.push(item.price * item.article);
+        }
+        result = result.reduce(function (sum, el) {
+          return sum + el;
+        });
+        return result;
+      } else {
+        return 0;
+      }
+    },
   },
   components: { CartList },
 };
