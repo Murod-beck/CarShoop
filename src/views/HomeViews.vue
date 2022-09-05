@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Recommend from '@/components/homes/Recommend.vue';
-import Service from '@/components/homes/Service.vue';
+import Recommend from '@/components/home/Recommend.vue';
+import Service from '@/components/home/Service.vue';
 export default {
   name: 'HomeViews',
   created() {},
