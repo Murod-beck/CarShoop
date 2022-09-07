@@ -10,7 +10,7 @@
           </div>
         </div>
       </div>
-      <CartList :items="cart" @deletCart="deletCart" />
+      <CartList :items="cart" />
     </div>
   </div>
 </template>
@@ -20,17 +20,9 @@ import { mapGetters } from 'vuex';
 import CartList from '@/components/cart/CartList.vue';
 export default {
   name: 'Carts',
-  created() {},
   data() {
     return {};
   },
-  props: {},
-  methods: {
-    deletCart(index) {
-      this.$store.dispatch('deletCarts', index);
-    },
-  },
-  mounted() {},
   computed: {
     ...mapGetters(['cart']),
     totalCart() {

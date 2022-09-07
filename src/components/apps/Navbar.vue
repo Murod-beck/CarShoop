@@ -1,5 +1,5 @@
 <template>
-  <div class="fonts">
+  <div>
     <nav class="hide-on-med-and-down purple darken-4">
       <div class="nav-wrapper conter">
         <ul>

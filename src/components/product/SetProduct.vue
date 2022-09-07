@@ -121,7 +121,7 @@ export default {
         return;
       }
       const setProduct = {
-        productId: this.category,
+        categoryId: this.category,
         name: this.names,
         price: this.price,
         article: this.article,

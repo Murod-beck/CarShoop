@@ -8,32 +8,46 @@ export default {
     },
   },
   mutations: {
-    setCart: (state, item) => {
+    setCart: (state, product) => {
       if (state.cart.length) {
         let addProduct = false;
         state.cart.map((inx) => {
-          if (inx.id === item.id) {
+          if (inx.id === product.id) {
             addProduct = true;
             item.article++;
           }
         });
         if (!addProduct) {
-          state.cart.push(item);
+          state.cart.push(product);
         }
       } else {
-        state.cart.push(item);
+        state.cart.push(product);
       }
     },
-    deleteCart: (state, index) => {
+    deleteCarts: (state, index) => {
       state.cart.splice(index, 1);
+    },
+    incrementCarts: (state, index) => {
+      state.cart[index].article++;
+    },
+    decrementCarts: (state, index) => {
+      if (state.cart[index].article > 1) {
+        state.cart[index].article--;
+      }
     },
   },
   actions: {
-    addCarts({ commit, dispatch }, item) {
-      commit('setCart', item);
+    addCarts({ commit, dispatch }, product) {
+      commit('setCart', product);
     },
-    deletCarts({ commit, dispatch }, index) {
-      commit('deleteCart', index);
+    deleteCart({ commit, dispatch }, index) {
+      commit('deleteCarts', index);
+    },
+    incrementCart({ commit, dispatch }, index) {
+      commit('incrementCarts', index);
+    },
+    decrementCart({ commit, dispatch }, index) {
+      commit('decrementCarts', index);
     },
   },
 };

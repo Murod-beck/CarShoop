@@ -13,9 +13,10 @@
           ><i class="material-icons color">menu</i></a
         >
         <router-link to="/cart" class="right color"
-          ><i class="material-icons right color">shopping_cart</i>Tovarlar:
-          {{ cart.length }}</router-link
-        >
+          ><i class="material-icons right color">shopping_cart</i> Tovarlar:{{
+            cart.length
+          }}
+        </router-link>
         <ul class="right hide-on-med-and-down">
           <li>
             <div class="input-field">
@@ -45,11 +46,9 @@
 import { mapGetters } from 'vuex';
 export default {
   name: 'Header',
-  created() {},
   data() {
     return {};
   },
-  props: {},
   methods: {},
   computed: {
     ...mapGetters(['cart']),

@@ -13,17 +13,17 @@
       <div class="card-tabs">
         <ul class="tabs tabs-fixed-width">
           <li class="tab">
-            <a class="waves-effect"
+            <a class="waves-effect" @click="Increment(index)"
               ><i class="material-icons color">add_circle_outline</i></a
             >
           </li>
           <li class="tab">
-            <a class="waves-effect"
+            <a class="waves-effect" @click="Decrement(index)"
               ><i class="material-icons color">remove_circle_outline </i></a
             >
           </li>
           <li class="tab">
-            <a class="waves-effect" @click="deleteCart(index)"
+            <a class="waves-effect" @click="Delete(index)"
               ><i class="material-icons color">delete </i></a
             >
           </li>
@@ -36,7 +36,6 @@
 <script>
 export default {
   name: 'CartList',
-  created() {},
   data() {
     return {};
   },
@@ -48,13 +47,17 @@ export default {
       },
     },
   },
-  computed: {},
   methods: {
-    deleteCart(index) {
-      this.$emit('deletCart', index);
+    Delete(index) {
+      this.$store.dispatch('deleteCart', index);
+    },
+    Increment(index) {
+      this.$store.dispatch('incrementCart', index);
+    },
+    Decrement(index) {
+      this.$store.dispatch('decrementCart', index);
     },
   },
-  emits: ['deletCart', 'totalCart'],
 };
 </script>
 

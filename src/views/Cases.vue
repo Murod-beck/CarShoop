@@ -5,34 +5,34 @@
         <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
         <Filters />
       </div>
-      <div class="col s12 m4 l3" v-for="cas of cases" :key="cas">
+      <div class="col s12 m4 l3" v-for="produc of product" :key="produc">
         <div class="card large">
           <div class="card-image">
             <img src="@/images/12.jpg" />
           </div>
           <div class="card-content">
-            <span class="card-title">{{ cas.name }}</span>
+            <span class="card-title">{{ produc.name }}</span>
 
-            <h6>Narxi: {{ cas.price }} ₽.</h6>
+            <h6>Narxi: {{ produc.price }} ₽.</h6>
             <hr />
-            <p>{{ cas.description }}</p>
+            <p>{{ produc.description }}</p>
           </div>
           <hr />
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
-                <a class="waves-effect" @click="addCart(cas)"
-                  ><i class="material-icons color">add_shopping_cart</i></a
+                <a class="waves-effect" @click="addCart(produc)"
+                  ><i class="material-icons">add_shopping_cart</i></a
                 >
               </li>
               <li class="tab">
                 <a class="waves-effect"
-                  ><i class="material-icons color">assessment</i></a
+                  ><i class="material-icons">assessment</i></a
                 >
               </li>
               <li class="tab">
                 <a class="waves-effect"
-                  ><i class="material-icons color">favorite_border </i></a
+                  ><i class="material-icons">favorite_border </i></a
                 >
               </li>
             </ul>
@@ -47,20 +47,18 @@
 import Filters from '@/components/Filters.vue';
 export default {
   name: 'Cases',
-  created() {},
   data() {
     return {
-      cases: [],
+      product: [],
     };
   },
-  props: {},
   methods: {
-    addCart(item) {
-      this.$store.dispatch('addCarts', item);
+    addCart(produc) {
+      this.$store.dispatch('addCarts', produc);
     },
   },
   async mounted() {
-    this.cases = await this.$store.dispatch('fetchProduct');
+    this.product = await this.$store.dispatch('fetchProduct');
   },
   components: { Filters },
 };
