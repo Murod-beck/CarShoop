@@ -1,13 +1,13 @@
 <template>
-  <div class="col s12 m6 l3" v-for="(item, index) in items" :key="index">
+  <div class="col s12 m6 l3" v-for="(cart, index) in carts" :key="index">
     <div class="card large">
       <div class="card-image">
         <img src="@/images/12.jpg" />
       </div>
       <div class="card-content">
-        <span class="card-title">{{ item.name }}</span>
-        <h6>Narxi: {{ item.price }} ₽.</h6>
-        <h6>Dona: {{ item.article }}</h6>
+        <span class="card-title">{{ cart.name }}</span>
+        <h6>Narxi: {{ cart.price }} ₽.</h6>
+        <h6>Dona: {{ cart.article }}</h6>
       </div>
       <hr />
       <div class="card-tabs">
@@ -40,7 +40,7 @@ export default {
     return {};
   },
   props: {
-    items: {
+    carts: {
       type: Object,
       default() {
         return {};

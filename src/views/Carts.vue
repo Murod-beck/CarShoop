@@ -8,9 +8,16 @@
             <h5>Umumiy qiymat</h5>
             <h4 class="badge">{{ totalCart }} ₽.</h4>
           </div>
+          <div class="collection white">
+            <h5>Sotib olish</h5>
+            <a class="waves-effect waves-light btn"
+              ><i class="material-icons right">credit_card</i>Cart</a
+            >
+          </div>
         </div>
       </div>
-      <CartList :items="cart" />
+      <CartList v-if="cart.length" :carts="cart" />
+      <h5 class="red-text center" v-else>Korzinka xozircha bo'sh</h5>
     </div>
   </div>
 </template>
@@ -32,7 +39,7 @@ export default {
         for (let item of this.cart) {
           result.push(item.price * item.article);
         }
-        result = result.reduce(function (sum, el) {
+        result = result.reduce((sum, el) => {
           return sum + el;
         });
         return result;

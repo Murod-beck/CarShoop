@@ -5,7 +5,11 @@
         <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
         <Filters />
       </div>
-      <div class="col s12 m4 l3" v-for="produc of product" :key="produc">
+      <div
+        class="col s12 m4 l3"
+        v-for="(produc, index) of product"
+        :key="index"
+      >
         <div class="card large">
           <div class="card-image">
             <img src="@/images/12.jpg" />
@@ -31,8 +35,8 @@
                 >
               </li>
               <li class="tab">
-                <a class="waves-effect"
-                  ><i class="material-icons">favorite_border </i></a
+                <a class="waves-effect" @click="addSelected(produc, index)"
+                  ><i class="material-icons">{{ favorit }} </i></a
                 >
               </li>
             </ul>
@@ -49,12 +53,17 @@ export default {
   name: 'Cases',
   data() {
     return {
+      favorit: 'favorite_border',
       product: [],
     };
   },
   methods: {
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
+    },
+    addSelected(produc, index) {
+      this.$store.dispatch('addSelect', produc);
+      this.favorit = 'favorite';
     },
   },
   async mounted() {
