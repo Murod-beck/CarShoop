@@ -73,6 +73,7 @@ export default {
         this.$message('Categorya muvaffaqiyatli yuklandi');
         this.category = '';
         this.id = '';
+        this.v$.$reset();
       } catch {}
     },
   },

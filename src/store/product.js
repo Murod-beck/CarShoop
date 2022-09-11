@@ -11,6 +11,8 @@ import {
   ref as sgRef,
   uploadBytes,
   updateMetadata,
+  getMetadata,
+  getDownloadURL,
 } from 'firebase/storage';
 
 export default {
@@ -40,6 +42,16 @@ export default {
           });
         });
         return selectod;
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async fetchPhoto({ commit, dispatch }) {
+      try {
+        const sg = getStorage();
+
+        // return getMetadata(sgRef(sg, photo.title));
       } catch (e) {
         commit('setError', e);
         throw e;

@@ -137,6 +137,7 @@ export default {
           (this.article = ''),
           (this.description = ''),
           (this.photoTitle = '');
+        this.v$.$reset();
       } catch (e) {}
     },
     newPhoto(event) {
