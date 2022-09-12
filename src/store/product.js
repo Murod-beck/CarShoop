@@ -11,20 +11,26 @@ import {
   ref as sgRef,
   uploadBytes,
   updateMetadata,
-  getMetadata,
   getDownloadURL,
 } from 'firebase/storage';
 
 export default {
   actions: {
-    async addProduct({ commit, dispatch }, addProduct) {
-      const photo = addProduct.photo;
-      const title = addProduct.title;
+    async addProduct({ commit, dispatch }, product) {
+      const image = product.photo;
       try {
         const sg = getStorage();
         const db = getDatabase();
-        await push(dbRef(db, 'product/'), addProduct);
-        await uploadBytes(sgRef(sg, 'photo/' + title), photo);
+        const products = await push(dbRef(db, 'product/'), product);
+        const imageExt = image.name.slice(image.name.lastIndexOf('.'));
+        const fileDate = await uploadBytes(
+          sgRef(sg, `photo/ ${products.key}${imageExt}`),
+          image
+        );
+        const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
+        await update(child(dbRef(db, `product/`), products.key), {
+          title: imageSrc,
+        });
       } catch {
         commit('setError', e);
         throw e;
@@ -42,16 +48,6 @@ export default {
           });
         });
         return selectod;
-      } catch (e) {
-        commit('setError', e);
-        throw e;
-      }
-    },
-    async fetchPhoto({ commit, dispatch }) {
-      try {
-        const sg = getStorage();
-
-        // return getMetadata(sgRef(sg, photo.title));
       } catch (e) {
         commit('setError', e);
         throw e;

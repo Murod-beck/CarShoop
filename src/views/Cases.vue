@@ -12,7 +12,7 @@
       >
         <div class="card large">
           <div class="card-image">
-            <!-- <img :src="produc.photo" /> -->
+            <img :src="produc.title" />
           </div>
           <div class="card-content">
             <span class="card-title">{{ produc.name }}</span>
@@ -69,10 +69,8 @@ export default {
   async mounted() {
     const category = await this.$store.dispatch('fetchCategory');
     const products = await this.$store.dispatch('fetchProduct');
-    const photo = await this.$store.dispatch('fetchPhoto');
-    console.log(photo);
     products.map((pro) => {
-      if (pro.categoryId === category[1].id) {
+      if (pro.categoryId === category[0].id) {
         this.product.push(pro);
       }
     });
