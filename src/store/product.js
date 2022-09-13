@@ -17,7 +17,7 @@ import {
 export default {
   actions: {
     async addProduct({ commit, dispatch }, product) {
-      const image = product.photo;
+      const image = product.imagefile;
       try {
         const sg = getStorage();
         const db = getDatabase();
@@ -29,9 +29,30 @@ export default {
         );
         const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
         await update(child(dbRef(db, `product/`), products.key), {
-          title: imageSrc,
+          imagetitle: imageSrc,
         });
       } catch {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async updateProduct({ commit, dispatch }, upProduct) {
+      const id = upProduct.id;
+      const image = upProduct.imagefile;
+      try {
+        const sg = getStorage();
+        const db = getDatabase();
+        await update(child(dbRef(db, 'product/'), id), upProduct);
+        const imageExt = image.name.slice(image.name.lastIndexOf('.'));
+        const fileDate = await updateMetadata(
+          sgRef(sg, `photo/ ${id}${imageExt}`),
+          image
+        );
+        const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
+        await update(child(dbRef(db, `product/`), id), {
+          imagetitle: imageSrc,
+        });
+      } catch (e) {
         commit('setError', e);
         throw e;
       }
@@ -48,20 +69,6 @@ export default {
           });
         });
         return selectod;
-      } catch (e) {
-        commit('setError', e);
-        throw e;
-      }
-    },
-    async updateProduct({ commit, dispatch }, upProduct) {
-      const id = upProduct.id;
-      const photo = upProduct.photo;
-      const title = upProduct.title;
-      try {
-        const sg = getStorage();
-        const db = getDatabase();
-        update(child(dbRef(db, 'product'), id), upProduct);
-        updateMetadata(sgRef(sg, 'photo/' + title), photo);
       } catch (e) {
         commit('setError', e);
         throw e;

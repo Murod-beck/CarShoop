@@ -15,32 +15,32 @@
 
     <div class="input-field">
       <input
-        id="input_text1"
+        id="title"
         type="text"
-        v-model.trim="names"
-        :class="{ invalid: v$.names.$error && v$.names.required }"
+        v-model.trim="title"
+        :class="{ invalid: v$.title.$error && v$.title.required }"
       />
-      <label for="input_text1">Nomi</label>
+      <label for="title">Nomi</label>
     </div>
 
     <div class="input-field">
       <input
-        id="input_text2"
+        id="price"
         type="text"
         v-model.trim="price"
         :class="{ invalid: v$.price.$error && v$.price.required }"
       />
-      <label for="input_text2">Narxi</label>
+      <label for="price">Narxi</label>
     </div>
 
     <div class="input-field">
       <input
-        id="input_text3"
+        id="article"
         type="text"
         v-model.trim="article"
         :class="{ invalid: v$.article.$error && v$.article.required }"
       />
-      <label for="input_text3">Article</label>
+      <label for="article">Article</label>
     </div>
 
     <div class="input-field">
@@ -54,19 +54,19 @@
     </div>
 
     <div class="file-field">
-      <input type="file" @change="newPhoto" />
+      <input type="file" @change="newImage" />
       <label for="textarea1">Photo</label>
       <div class="file-path-wrapper">
         <input
           class="file-path"
           type="text"
-          v-model="photoTitle"
-          :class="{ invalid: v$.photoTitle.$error && v$.photoTitle.required }"
+          v-model="imagetitle"
+          :class="{ invalid: v$.imagetitle.$error && v$.imagetitle.required }"
         />
       </div>
     </div>
-    <div class="center" v-if="photoTitle">
-      <img :src="photoUrl" width="150" />
+    <div class="center" v-if="imagetitle">
+      <img :src="imageUrl" width="150" />
     </div>
 
     <div class="card-action">
@@ -95,22 +95,22 @@ export default {
       select: null,
       selected: [],
       category: null,
-      names: '',
+      title: '',
       price: '',
       article: '',
       description: '',
-      photoFile: null,
-      photoTitle: '',
-      photoUrl: '',
+      imagefile: null,
+      imagetitle: '',
+      imageUrl: '',
     };
   },
   validations() {
     return {
-      names: { required },
+      title: { required },
       price: { required },
       article: { required },
       description: { required },
-      photoTitle: { required },
+      imagetitle: { required },
     };
   },
   props: {},
@@ -122,38 +122,39 @@ export default {
       }
       const setProduct = {
         categoryId: this.category,
-        name: this.names,
+        title: this.title,
         price: this.price,
         article: this.article,
+        number: 1,
         description: this.description,
-        photo: this.photoFile,
-        title: this.photoTitle,
+        imagefile: this.imagefile,
+        imagetitle: this.imagetitle,
       };
       try {
         await this.$store.dispatch('addProduct', setProduct);
         this.$message('Yuklash muvaffaqiyatli yakunlandi');
-        (this.names = ''),
+        (this.title = ''),
           (this.price = ''),
           (this.article = ''),
           (this.description = ''),
-          (this.photoTitle = '');
+          (this.imagetitle = '');
         this.v$.$reset();
       } catch (e) {}
     },
-    newPhoto(event) {
+    newImage(event) {
       const files = event.target.files;
       let filename = files[0].name;
       if (filename.lastIndexOf('.') <= 0) {
         return alert('File tanlang!');
       }
-      this.photoTitle = filename;
+      this.imagetitle = filename;
 
       const fileReader = new FileReader();
       fileReader.addEventListener('load', () => {
-        this.photoUrl = fileReader.result;
+        this.imageUrl = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
-      this.photoFile = files[0];
+      this.imagefile = files[0];
     },
   },
   async mounted() {

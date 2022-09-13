@@ -5,9 +5,9 @@
     </div>
 
     <div class="input-field">
-      <select ref="select" v-model="products">
-        <option v-for="selec of selectod" :key="selec.id" :value="selec.id">
-          {{ selec.name }}
+      <select ref="select" v-model="product">
+        <option v-for="produc of products" :key="produc.id" :value="produc.id">
+          {{ produc.title }}
         </option>
       </select>
       <label>Product</label>
@@ -15,12 +15,12 @@
 
     <div class="input-field">
       <input
-        id="name"
+        id="title"
         type="text"
-        v-model.trim="names"
-        :class="{ invalid: v$.names.$error && v$.names.required }"
+        v-model.trim="title"
+        :class="{ invalid: v$.title.$error && v$.title.required }"
       />
-      <label for="name">Nomi</label>
+      <label for="title">Nomi</label>
     </div>
 
     <div class="input-field">
@@ -54,19 +54,19 @@
     </div>
 
     <div class="file-field">
-      <input type="file" @change="upPhoto" />
+      <input type="file" @change="updateImage" />
       <label for="textarea1">Photo</label>
       <div class="file-path-wrapper">
         <input
           class="file-path"
           type="text"
-          v-model="photoTitle"
-          :class="{ invalid: v$.photoTitle.$error && v$.photoTitle.required }"
+          v-model="imagetitle"
+          :class="{ invalid: v$.imagetitle.$error && v$.imagetitle.required }"
         />
       </div>
     </div>
-    <div class="center" v-if="photoTitle">
-      <img :src="photoUrl" width="150" />
+    <div class="center" v-if="imagetitle">
+      <img :src="imageUrl" width="150" />
     </div>
 
     <div class="card-action">
@@ -74,7 +74,7 @@
         <button
           class="btn waves-effect waves-light auth-submit"
           type="submit"
-          @click.prevent="upProducta"
+          @click.prevent="updateProducts"
         >
           Tahrirlash
           <i class="material-icons right">send</i>
@@ -93,67 +93,67 @@ export default {
     return {
       v$: useVuelidate(),
       select: null,
-      selectod: [],
-      products: null,
-      names: '',
+      product: null,
+      products: [],
+      title: '',
       price: '',
       article: '',
       description: '',
-      photoFile: null,
-      photoTitle: '',
-      photoUrl: '',
+      imagefile: null,
+      imagetitle: '',
+      imageUrl: '',
     };
   },
   validations() {
     return {
-      names: { required },
+      title: { required },
       price: { required },
       article: { required },
       description: { required },
-      photoTitle: { required },
+      imagetitle: { required },
     };
   },
   props: {},
   methods: {
-    async upProducta() {
+    async updateProducts() {
       this.v$.$validate();
       if (this.v$.$error) {
         return;
       }
       const upProduct = {
-        id: this.products,
-        name: this.names,
+        id: this.product,
+        title: this.title,
         price: this.price,
         article: this.article,
         description: this.description,
-        photo: this.photoFile,
-        title: this.photoTitle,
+        imagefile: this.imagefile,
+        imagetitle: this.imagetitle,
       };
       try {
         await this.$store.dispatch('updateProduct', upProduct);
-        this.$message('Yuklash muvaffaqiyatli yangilandi');
-        (this.names = ''),
+        this.$message('Yangilash muvaffaqiyatli yangilandi!');
+        (this.title = ''),
           (this.price = ''),
           (this.article = ''),
           (this.description = ''),
-          (this.photoTitle = '');
+          (this.imagetitle = '');
         this.v$.$reset();
       } catch (e) {}
     },
-    upPhoto(event) {
+    updateImage(event) {
       const files = event.target.files;
       let filename = files[0].name;
       if (filename.lastIndexOf('.') <= 0) {
         return alert('File tanlang!');
       }
-      this.photoTitle = filename;
+      this.imagetitle = filename;
 
       const fileReader = new FileReader();
       fileReader.addEventListener('load', () => {
-        this.photoUrl = fileReader.result;
+        this.imageUrl = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
-      this.photoFile = files[0];
+      this.imagefile = files[0];
     },
   },
   async mounted() {
@@ -161,9 +161,9 @@ export default {
       this.select = M.FormSelect.init(this.$refs.select);
     }, 0);
 
-    this.selectod = await this.$store.dispatch('fetchProduct');
-    if (this.selectod.length) {
-      this.products = this.selectod[0].id;
+    this.products = await this.$store.dispatch('fetchProduct');
+    if (this.products.length) {
+      this.product = this.products[0].id;
     }
   },
   destroyed() {

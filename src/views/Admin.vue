@@ -35,7 +35,7 @@
               <button
                 class="btn waves-effect waves-light auth-submit"
                 type="submit"
-                @click.prevent="addCategorya"
+                @click.prevent="addCategoryies"
               >
                 Yuklash
                 <i class="material-icons right">send</i>
@@ -66,13 +66,12 @@ export default {
   },
   props: {},
   methods: {
-    async addCategorya() {
+    async addCategoryies() {
       const categories = this.category;
       try {
         await this.$store.dispatch('addCategory', categories);
         this.$message('Categorya muvaffaqiyatli yuklandi');
         this.category = '';
-        this.id = '';
         this.v$.$reset();
       } catch {}
     },
