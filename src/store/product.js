@@ -38,15 +38,15 @@ export default {
     },
     async updateProduct({ commit, dispatch }, upProduct) {
       const id = upProduct.id;
-      const image = upProduct.imagefile;
+      const images = upProduct.imagefile;
       try {
         const sg = getStorage();
         const db = getDatabase();
         await update(child(dbRef(db, 'product/'), id), upProduct);
-        const imageExt = image.name.slice(image.name.lastIndexOf('.'));
+        const imageExt = images.name.slice(images.name.lastIndexOf('.'));
         const fileDate = await updateMetadata(
           sgRef(sg, `photo/ ${id}${imageExt}`),
-          image
+          images
         );
         const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
         await update(child(dbRef(db, `product/`), id), {
