@@ -1,15 +1,11 @@
 <template>
-  <div class="fonts">
+  <div>
     <nav class="navi indigo lighten-4">
       <div class="nav-wrapper conter">
         <router-link to="/" class="brand-logo color hide-on-small-only"
           >Logo</router-link
         >
-        <a
-          href="#"
-          data-target="mobile-demo"
-          class="sidenav-trigger"
-          @click.prevent="$emit('navClick')"
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
           ><i class="material-icons color">menu</i></a
         >
         <router-link to="/cart" class="right color"
@@ -31,7 +27,7 @@
             >
           </li>
           <li>
-            <router-link to="/selected"
+            <router-link to="/"
               ><i class="material-icons color">favorite</i></router-link
             >
           </li>

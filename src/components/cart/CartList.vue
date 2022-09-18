@@ -2,12 +2,12 @@
   <div class="col s12 m6 l3" v-for="(cart, index) in carts" :key="index">
     <div class="card large">
       <div class="card-image">
-        <img src="@/images/12.jpg" />
+        <img :src="cart.imagetitle" />
       </div>
       <div class="card-content">
-        <span class="card-title">{{ cart.name }}</span>
+        <span class="card-title">{{ cart.title }}</span>
         <h6>Narxi: {{ cart.price }} ₽.</h6>
-        <h6>Dona: {{ cart.article }}</h6>
+        <h6>Dona: {{ cart.number }}</h6>
       </div>
       <hr />
       <div class="card-tabs">

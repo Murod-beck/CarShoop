@@ -3,9 +3,9 @@
     <nav class="hide-on-med-and-down purple darken-4">
       <div class="nav-wrapper conter">
         <ul>
-          <li v-for="car of cars" :key="car.url">
-            <router-link :to="car.url">
-              {{ car.title }}
+          <li v-for="menu of menus" :key="menu.url">
+            <router-link :to="menu.url">
+              {{ menu.title }}
             </router-link>
           </li>
           <div class="right">
@@ -16,14 +16,14 @@
         </ul>
       </div>
     </nav>
-    <ul
-      id="mobile-demo"
-      class="sidenav blue lighten-5"
-      ref="sideNav"
-      :class="{ open: openMenyu }"
-    >
+    <ul id="mobile-demo" class="sidenav blue lighten-5" ref="sideNav">
       <li>
-        <router-link to="/" class="brand-logo color center">Logo</router-link>
+        <router-link
+          to="/"
+          class="brand-logo color center"
+          @click="Menu.close()"
+          >Logo</router-link
+        >
       </li>
       <div class="input-field searchs">
         <input id="search" type="search" required />
@@ -32,18 +32,18 @@
         >
         <i class="material-icons color">close</i>
       </div>
-      <router-link to="/user" @click="Menu.close()"
+      <router-link to="/user"
         ><i class="material-icons color">person</i></router-link
       >
-      <router-link to="/selected" @click="Menu.close()"
+      <router-link to="/" @click="Menu.close()"
         ><i class="material-icons color">favorite</i></router-link
       >
       <a href="#"
         ><i class="material-icons color">phone_in_talk</i>+7 966 118 80 89</a
       >
-      <li v-for="car of cars" :key="car.url" @click="Menu.close()">
-        <router-link class="color" :to="car.url">
-          {{ car.title }}
+      <li v-for="menu of menus" :key="menu.url" @click="Menu.close()">
+        <router-link class="color" :to="menu.url">
+          {{ menu.title }}
         </router-link>
       </li>
     </ul>
@@ -53,11 +53,10 @@
 <script>
 export default {
   name: 'Navbar',
-  created() {},
   data() {
     return {
       Menu: null,
-      cars: [
+      menus: [
         { id: 1, title: 'Sidena Chexollari', logo: '', url: '/cases' },
         { id: 1, title: "Ro'l Chexollari", logo: '', url: '/whell' },
         { id: 1, title: 'Avto Bezaklar', logo: '', url: '/autos' },
@@ -72,7 +71,7 @@ export default {
       draggable: false,
     });
   },
-  props: ['openMenyu'],
+  props: {},
   methods: {},
 };
 </script>

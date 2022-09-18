@@ -2,36 +2,45 @@
   <div class="conter">
     <div class="row">
       <div class="col s12 m4 l3">
-        <div class="collection-header center"><h4>Avto Iforlar</h4></div>
+        <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
         <Filters />
       </div>
-      <div class="col s12 m4 l3" v-for="product of products" :key="product">
+      <Loader v-if="loading" />
+      <div
+        v-else
+        class="col s12 m4 l3"
+        v-for="(produc, index) of product"
+        :key="index"
+      >
         <div class="card large">
           <div class="card-image">
-            <img :src="require('@/images/' + product.img)" />
+            <img :src="produc.imagetitle" />
           </div>
           <div class="card-content">
-            <span class="card-title">{{ product.title }}</span>
-            <span class="card-title">Narxi: {{ product.sum }}</span>
-            <span class="card-title">Art: {{ product.art }}</span>
-            <p>{{ product.par }}</p>
+            <span class="card-title">{{ produc.title }}</span>
+
+            <h6>Narxi: {{ produc.price }} ₽.</h6>
+            <hr />
+            <p>{{ produc.description }}</p>
           </div>
           <hr />
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
-                <a class="waves-effect"
-                  ><i class="material-icons color">add_shopping_cart</i></a
+                <a class="waves-effect" @click="addCart(produc)"
+                  ><i class="material-icons">add_shopping_cart</i></a
                 >
               </li>
               <li class="tab">
                 <a class="waves-effect"
-                  ><i class="material-icons color">assessment</i></a
+                  ><i class="material-icons">assessment</i></a
                 >
               </li>
               <li class="tab">
-                <a class="waves-effect"
-                  ><i class="material-icons color">favorite_border </i></a
+                <a class="waves-effect" @click="addSelected(produc, index)"
+                  ><i class="material-icons"
+                    >{{ favorit ? 'favorite_border' : 'favorite' }}
+                  </i></a
                 >
               </li>
             </ul>
@@ -43,52 +52,38 @@
 </template>
 
 <script>
-import Filters from '@/components/Filters.vue';
+import Filters from '@/components/product/Filters.vue';
+import Loader from '@/components/apps/Loader.vue';
 export default {
   name: 'Cases',
-  created() {},
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          img: '41.jpg',
-          title: 'Nomi',
-          sum: 100,
-          art: 143,
-          par: 'I am a very simple card. I am a very simple card.I am good at containing small bits of information. I am convenient because I require ',
-        },
-        {
-          id: 2,
-          img: '42.jpg',
-          title: 'Nomi',
-          sum: 300,
-          art: 243,
-          par: 'I am a very simple card. I am good at containing small bits of information require ',
-        },
-        {
-          id: 3,
-          img: '43.jpg',
-          title: 'Nomi',
-          sum: 300,
-          art: 343,
-          par: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require ',
-        },
-        {
-          id: 4,
-          img: '44.jpg',
-          title: 'Nomi',
-          sum: 400,
-          art: 343,
-          par: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require ',
-        },
-      ],
+      loading: true,
+      favorit: true,
+      product: [],
     };
   },
-  props: {},
-  methods: {},
-  components: { Filters },
+  methods: {
+    addCart(produc) {
+      this.$store.dispatch('addCarts', produc);
+    },
+    addSelected(produc, index) {
+      this.$store.dispatch('addSelect', produc);
+      this.favorit = false;
+    },
+  },
+  async mounted() {
+    const category = await this.$store.dispatch('fetchCategory');
+    const products = await this.$store.dispatch('fetchProduct');
+    products.map((pro) => {
+      if (pro.categoryId === category[3].id) {
+        this.product.push(pro);
+      }
+    });
+    this.loading = false;
+  },
+  components: { Filters, Loader },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

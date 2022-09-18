@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .loaders {
   width: 100px;
   height: 100px;

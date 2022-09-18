@@ -14,7 +14,7 @@ export default {
         state.cart.map((inx) => {
           if (inx.id === product.id) {
             addProduct = true;
-            item.article++;
+            item.number++;
           }
         });
         if (!addProduct) {
@@ -28,11 +28,11 @@ export default {
       state.cart.splice(index, 1);
     },
     incrementCarts: (state, index) => {
-      state.cart[index].article++;
+      state.cart[index].number++;
     },
     decrementCarts: (state, index) => {
-      if (state.cart[index].article > 1) {
-        state.cart[index].article--;
+      if (state.cart[index].number > 1) {
+        state.cart[index].number--;
       }
     },
   },

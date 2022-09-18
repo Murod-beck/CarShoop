@@ -37,7 +37,7 @@ export default {
 
       if (this.cart.length) {
         for (let item of this.cart) {
-          result.push(item.price * item.article);
+          result.push(item.price * item.number);
         }
         result = result.reduce((sum, el) => {
           return sum + el;

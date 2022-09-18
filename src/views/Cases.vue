@@ -2,10 +2,14 @@
   <div class="conter">
     <div class="row">
       <div class="col s12 m4 l3">
-        <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
+        <div class="collection-header center">
+          <h4>Sedina Chexollari</h4>
+        </div>
         <Filters />
       </div>
+      <Loader v-if="loading" />
       <div
+        v-else
         class="col s12 m4 l3"
         v-for="(produc, index) of product"
         :key="index"
@@ -15,7 +19,7 @@
             <img :src="produc.imagetitle" />
           </div>
           <div class="card-content">
-            <span class="card-title">{{ produc.title }}</span>
+            <span class="card-title">Nomi: {{ produc.title }}</span>
 
             <h6>Narxi: {{ produc.price }} ₽.</h6>
             <hr />
@@ -25,7 +29,7 @@
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
-                <a class="waves-effect" @click="addCart(produc)"
+                <a class="waves-effect" @click.once="addCart(produc)"
                   ><i class="material-icons">add_shopping_cart</i></a
                 >
               </li>
@@ -35,8 +39,10 @@
                 >
               </li>
               <li class="tab">
-                <a class="waves-effect" @click="addSelected(produc, index)"
-                  ><i class="material-icons">{{ favorit }} </i></a
+                <a
+                  class="waves-effect"
+                  @click="$router.push('/detail', produc.id)"
+                  ><i class="material-icons">more_vert </i></a
                 >
               </li>
             </ul>
@@ -48,12 +54,15 @@
 </template>
 
 <script>
-import Filters from '@/components/Filters.vue';
+import Filters from '@/components/product/Filters.vue';
+import Loader from '@/components/apps/Loader.vue';
 export default {
   name: 'Cases',
   data() {
     return {
-      favorit: 'favorite_border',
+      loading: true,
+      favorit: 'favorite',
+      border: 'favorite_border',
       product: [],
     };
   },
@@ -61,21 +70,18 @@ export default {
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
     },
-    addSelected(produc, index) {
-      this.$store.dispatch('addSelect', produc);
-      this.favorit = 'favorite';
-    },
   },
   async mounted() {
     const category = await this.$store.dispatch('fetchCategory');
     const products = await this.$store.dispatch('fetchProduct');
     products.map((pro) => {
-      if (pro.categoryId === category[1].id) {
+      if (pro.categoryId === category[0].id) {
         this.product.push(pro);
       }
     });
+    this.loading = false;
   },
-  components: { Filters },
+  components: { Filters, Loader },
 };
 </script>
 

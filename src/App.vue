@@ -1,7 +1,7 @@
 <template>
   <div class="apps">
-    <Header @openMenu="openNav = !openNav" />
-    <Navbar :openMenyu="openNav" />
+    <Header />
+    <Navbar />
     <component :is="layout">
       <router-view />
     </component>
@@ -15,9 +15,7 @@ import Navbar from './components/apps/Navbar.vue';
 import Footer from './components/apps/Footer.vue';
 export default {
   data() {
-    return {
-      openNav: false,
-    };
+    return {};
   },
   computed: {
     layout() {
