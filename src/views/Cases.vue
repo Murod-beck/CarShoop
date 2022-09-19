@@ -41,7 +41,7 @@
               <li class="tab">
                 <a
                   class="waves-effect"
-                  @click="$router.push('/detail', produc.id)"
+                  @click="$router.push('/detail/' + produc.id)"
                   ><i class="material-icons">more_vert </i></a
                 >
               </li>

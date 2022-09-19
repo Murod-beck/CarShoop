@@ -14,12 +14,13 @@ import { getAnalytics } from 'firebase/analytics';
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
   authDomain: 'carshoop.firebaseapp.com',
-  databaseURL: process.env.VUE_APP_URL,
+  databaseURL:
+    'https://carshoop-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'carshoop',
   storageBucket: 'carshoop.appspot.com',
-  messagingSenderId: process.env.VUE_APP_ID,
-  appId: process.env.VUE_APP_API_ID,
-  measurementId: process.env.VUE_APP_MN_ID,
+  messagingSenderId: '929990967733',
+  appId: '1:929990967733:web:ee32bbfff9289b7a6499fc',
+  measurementId: 'G-5DM0KMT665',
 };
 const apps = initializeApp(firebaseConfig);
 const analytics = getAnalytics(apps);

@@ -1,23 +1,26 @@
 <template>
   <div class="conter">
-    <div class="row">
-      <div class="col s12 m3 l3">
-        <div class="collection-header center"><h5>Tanlangan</h5></div>
-      </div>
-      <div class="col s12 m9 l8">
+    <Loader v-if="loading" />
+    <div class="row" v-else>
+      <div class="col s12 m12">
         <div class="card">
-          <div class="row">
-            <div class="col s12 m5">
+          <div class="row" v-for="produc of product" :key="produc">
+            <div class="col s12 m5 l4">
               <div class="card-image">
-                <img src="@/images/12.jpg" />
+                <img :src="produc.imagetitle" />
               </div>
             </div>
             <div class="col s12 m7">
               <div class="card-content">
-                <span class="card-title">Card Title</span>
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                </p>
+                <span class="card-title">Nomi: {{ produc.title }}</span>
+                <h6>Rangi: {{ produc.article }}</h6>
+                <h6>Article: {{ produc.article }}</h6>
+                <span class="card-title">{{ produc.price }} ₽</span>
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="card-panel">
+                <p>{{ produc.description }}</p>
               </div>
               <div class="card-tabs">
                 <ul class="tabs tabs-fixed-width">
@@ -31,11 +34,6 @@
                       ><i class="material-icons">assessment</i></a
                     >
                   </li>
-                  <li class="tab">
-                    <a class="waves-effect"
-                      ><i class="material-icons">more_vert </i></a
-                    >
-                  </li>
                 </ul>
               </div>
             </div>
@@ -47,14 +45,29 @@
 </template>
 
 <script>
+import Loader from '@/components/apps/Loader.vue';
 export default {
   name: 'Detail',
-  created() {},
   data() {
-    return {};
+    return {
+      loading: true,
+      product: [],
+    };
   },
   props: {},
   methods: {},
+  async mounted() {
+    const id = this.$route.params.id;
+    const products = await this.$store.dispatch('fetchProduct');
+    products.map((pro) => {
+      if (pro.id === id) {
+        this.product.push(pro);
+      }
+    });
+
+    this.loading = false;
+  },
+  components: { Loader },
 };
 </script>
 

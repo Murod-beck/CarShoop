@@ -80,7 +80,7 @@ const routes = [
     component: () => import('../views/Carts.vue'),
   },
   {
-    path: '/detail',
+    path: '/detail/:id',
     name: 'Detail',
     meta: { layout: 'main', auth: true },
     component: () => import('../views/Detail.vue'),
