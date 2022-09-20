@@ -26,7 +26,7 @@
             <p>{{ produc.description }}</p>
           </div>
           <hr />
-          <div class="card-tabs">
+          <div class="card-tabs tabl">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
                 <a class="waves-effect" @click.once="addCart(produc)"

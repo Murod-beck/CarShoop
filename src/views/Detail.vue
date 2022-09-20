@@ -26,7 +26,9 @@
                 <ul class="tabs tabs-fixed-width">
                   <li class="tab">
                     <a class="waves-effect"
-                      ><i class="material-icons">add_shopping_cart</i></a
+                      ><i @click.once="addCart(produc)" class="material-icons"
+                        >add_shopping_cart</i
+                      ></a
                     >
                   </li>
                   <li class="tab">
@@ -55,7 +57,11 @@ export default {
     };
   },
   props: {},
-  methods: {},
+  methods: {
+    addCart(produc) {
+      this.$store.dispatch('addCarts', produc);
+    },
+  },
   async mounted() {
     const id = this.$route.params.id;
     const products = await this.$store.dispatch('fetchProduct');

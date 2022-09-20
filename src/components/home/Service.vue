@@ -1,20 +1,52 @@
 <template>
-  <div>
+  <div class="conter">
     <div class="row">
-      <div class="col s12 m6 l3">
-        <div class="card center">
-          <i class="material-icons large">airline_seat_recline_extra </i>
-          <div class="card-content">
-            <h4>CARD</h4>
-            <p>
-              I am a very simple card. I am good at containing small bits of
-              information. I am convenient because I require little markup to
-              use effectively.
-            </p>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
+      <div class="col s12 m12 l6">
+        <div class="center">
+          <i class="material-icons large">build</i>
+          <h4>Motor remont xizmati</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            odio ratione dolores voluptatem commodi corrupti sequi adipisci
+            excepturi atque provident quasi, ex error, iure porro ducimus maxime
+            repudiandae! Id, iure?
+          </p>
+        </div>
+      </div>
+      <div class="col s12 m12 l6">
+        <div class="center">
+          <i class="material-icons large">format_color_fill</i>
+          <h4>Yog' almashtirish xizmati</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            odio ratione dolores voluptatem commodi corrupti sequi adipisci
+            excepturi atque provident quasi, ex error, iure porro ducimus maxime
+            repudiandae! Id, iure?
+          </p>
+        </div>
+      </div>
+      <div class="col s12 m12 l6">
+        <div class="center">
+          <i class="material-icons large">local_car_wash</i>
+          <h4>Moyka xizmati</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            odio ratione dolores voluptatem commodi corrupti sequi adipisci
+            excepturi atque provident quasi, ex error, iure porro ducimus maxime
+            repudiandae! Id, iure?
+          </p>
+        </div>
+      </div>
+      <div class="col s12 m12 l6">
+        <div class="center">
+          <i class="material-icons large">directions_car</i>
+          <h4>Kuzov remont xizmati</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            odio ratione dolores voluptatem commodi corrupti sequi adipisci
+            excepturi atque provident quasi, ex error, iure porro ducimus maxime
+            repudiandae! Id, iure?
+          </p>
         </div>
       </div>
     </div>
@@ -24,7 +56,6 @@
 <script>
 export default {
   name: 'Service',
-  created() {},
   data() {
     return {};
   },
@@ -34,4 +65,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
