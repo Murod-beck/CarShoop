@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(225, 225, 225);
 }
 .conter {
     margin: 0 50px 0 50px;
@@ -28,22 +28,31 @@ img {
 }
 .card {
     margin-top: 25px;
+    background-color:rgb(240, 240, 240);
+    border-radius: 5px;
 }
 .auth-submit {
     width: 100%;
 }
 .card-image {
     height: 250px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 .card-content {
     min-height: 200px;
+    cursor: pointer;
 } 
+.tabs .tab {
+    padding: 3px;
+    background-color:rgb(240, 240, 240);
+}
 .btns {
-    background: linear-gradient(#8004e6, rgb(64, 0, 255), rgb(0, 128, 255));
+    background: linear-gradient(rgb(82, 105, 128), rgb(82, 55, 163), rgb(45, 31, 65));
     text-align: center;
     border-radius:5px;
     font: 12px/54px 'raleway-heavy', sans-serif;
 }  
 .btns:hover {
-    background: linear-gradient(#03002a, rgb(9, 0, 42), rgb(0, 50, 99));
+    background: linear-gradient(rgb(45, 31, 65), rgb(82, 55, 163), rgb(82, 105, 128));
 }

@@ -2,7 +2,9 @@
   <div class="conter">
     <div class="row">
       <div class="col s12 m4 l3">
-        <div class="collection-header center"><h4>Sedina Chexollari</h4></div>
+        <div class="collection-header center">
+          <h4>Sedina Chexollari</h4>
+        </div>
         <Filters />
       </div>
       <Loader v-if="loading" />
@@ -13,34 +15,29 @@
         :key="index"
       >
         <div class="card large">
-          <div class="card-image">
+          <div class="card-image" @click="$router.push('/detail/' + produc.id)">
             <img :src="produc.imagetitle" />
           </div>
           <div class="card-content">
-            <span class="card-title">{{ produc.title }}</span>
-
-            <h6>Narxi: {{ produc.price }} ₽.</h6>
+            <span
+              class="card-title"
+              @click="$router.push('/detail/' + produc.id)"
+              >Nomi: {{ produc.title }}</span
+            >
+            <h6>{{ produc.price }} ₽.</h6>
             <hr />
             <p>{{ produc.description }}</p>
           </div>
-          <hr />
-          <div class="card-tabs">
+          <div class="card-tabs tabl">
             <ul class="tabs tabs-fixed-width">
               <li class="tab">
-                <a class="waves-effect" @click="addCart(produc)"
-                  ><i class="material-icons">add_shopping_cart</i></a
+                <a class="waves-effect btns" @click.once="addCart(produc)"
+                  ><i class="material-icons icons">add_shopping_cart</i></a
                 >
               </li>
               <li class="tab">
-                <a class="waves-effect"
-                  ><i class="material-icons">assessment</i></a
-                >
-              </li>
-              <li class="tab">
-                <a class="waves-effect" @click="addSelected(produc, index)"
-                  ><i class="material-icons"
-                    >{{ favorit ? 'favorite_border' : 'favorite' }}
-                  </i></a
+                <a class="waves-effect btns" @click.once="addAsessment(produc)"
+                  ><i class="material-icons icons">assessment</i></a
                 >
               </li>
             </ul>
@@ -59,7 +56,6 @@ export default {
   data() {
     return {
       loading: true,
-      favorit: true,
       product: [],
     };
   },
@@ -67,9 +63,8 @@ export default {
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
     },
-    addSelected(produc, index) {
-      this.$store.dispatch('addSelect', produc);
-      this.favorit = false;
+    addAsessment(produc) {
+      this.$store.dispatch('addAsessments', produc);
     },
   },
   async mounted() {

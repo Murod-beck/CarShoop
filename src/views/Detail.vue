@@ -13,30 +13,45 @@
             <div class="col s12 m7">
               <div class="card-content">
                 <span class="card-title">Nomi: {{ produc.title }}</span>
-                <h6>Rangi: {{ produc.article }}</h6>
+                <div
+                  class="chip white-text"
+                  :class="{
+                    red: produc.color === 'qizil',
+                    black: produc.color === 'qora',
+                    blue: produc.color === 'kok',
+                    green: produc.color === 'yashil',
+                    yellow: produc.color === 'sariq',
+                    white: produc.color === 'oq',
+                    pink: produc.color === 'pushti',
+                  }"
+                >
+                  {{ produc.color }}
+                </div>
                 <h6>Article: {{ produc.article }}</h6>
                 <span class="card-title">{{ produc.price }} ₽</span>
-              </div>
-            </div>
-            <div class="col s12">
-              <div class="card-panel">
-                <p>{{ produc.description }}</p>
               </div>
               <div class="card-tabs">
                 <ul class="tabs tabs-fixed-width">
                   <li class="tab">
-                    <a class="waves-effect"
-                      ><i @click.once="addCart(produc)" class="material-icons"
+                    <a class="waves-effect btns"
+                      ><i
+                        @click.once="addCart(produc)"
+                        class="material-icons icons"
                         >add_shopping_cart</i
                       ></a
                     >
                   </li>
                   <li class="tab">
-                    <a class="waves-effect"
-                      ><i class="material-icons">assessment</i></a
+                    <a class="waves-effect btns"
+                      ><i class="material-icons icons">assessment</i></a
                     >
                   </li>
                 </ul>
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="card-content">
+                <p>{{ produc.description }}</p>
               </div>
             </div>
           </div>

@@ -35,6 +35,16 @@
 
     <div class="input-field">
       <input
+        id="color"
+        type="text"
+        v-model.trim="color"
+        :class="{ invalid: v$.color.$error && v$.color.required }"
+      />
+      <label for="color">Rangi</label>
+    </div>
+
+    <div class="input-field">
+      <input
         id="article"
         type="text"
         v-model.trim="article"
@@ -97,6 +107,7 @@ export default {
       products: [],
       title: '',
       price: '',
+      color: '',
       article: '',
       description: '',
       imagefile: null,
@@ -108,6 +119,7 @@ export default {
     return {
       title: { required },
       price: { required },
+      color: { required },
       article: { required },
       description: { required },
       imagetitle: { required },
@@ -124,6 +136,7 @@ export default {
         id: this.product,
         title: this.title,
         price: this.price,
+        color: this.color,
         article: this.article,
         description: this.description,
         imagefile: this.imagefile,
@@ -134,6 +147,7 @@ export default {
         this.$message('Yangilash muvaffaqiyatli yangilandi!');
         (this.title = ''),
           (this.price = ''),
+          (this.color = ''),
           (this.article = ''),
           (this.description = ''),
           (this.imagetitle = '');

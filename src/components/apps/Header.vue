@@ -27,8 +27,8 @@
             >
           </li>
           <li>
-            <router-link to="/"
-              ><i class="material-icons color">favorite</i></router-link
+            <router-link to="/asessment"
+              ><i class="material-icons color">assessment</i></router-link
             >
           </li>
         </ul>

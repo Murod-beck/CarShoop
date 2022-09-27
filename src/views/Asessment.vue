@@ -1,17 +1,9 @@
 <template>
   <div class="conter">
     <div class="row">
-      <div class="col s12 m4 l3">
-        <div class="collection-header center">
-          <h4>Sedina Chexollari</h4>
-        </div>
-        <Filters />
-      </div>
-      <Loader v-if="loading" />
       <div
-        v-else
-        class="col s12 m4 l3"
-        v-for="(produc, index) of product"
+        class="col s12 m6 l4"
+        v-for="(produc, index) of asessment"
         :key="index"
       >
         <div class="card large">
@@ -36,8 +28,8 @@
                 >
               </li>
               <li class="tab">
-                <a class="waves-effect btns" @click.once="addAsessment(produc)"
-                  ><i class="material-icons icons">assessment</i></a
+                <a class="waves-effect btns" @click="deleteAsessment(index)"
+                  ><i class="material-icons icons">delete</i></a
                 >
               </li>
             </ul>
@@ -49,35 +41,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Filters from '@/components/product/Filters.vue';
-import Loader from '@/components/apps/Loader.vue';
 export default {
-  name: 'Cases',
+  name: 'Asesment',
   data() {
     return {
       loading: true,
-      product: [],
     };
   },
   methods: {
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
     },
-    addAsessment(produc) {
-      this.$store.dispatch('addAsessments', produc);
+    deleteAsessment(index) {
+      this.$store.dispatch('deleteAsessments', index);
     },
   },
-  async mounted() {
-    const category = await this.$store.dispatch('fetchCategory');
-    const products = await this.$store.dispatch('fetchProduct');
-    products.map((pro) => {
-      if (pro.categoryId === category[5].id) {
-        this.product.push(pro);
-      }
-    });
-    this.loading = false;
+  computed: {
+    ...mapGetters(['asessment']),
   },
-  components: { Filters, Loader },
+  components: { Filters },
 };
 </script>
 

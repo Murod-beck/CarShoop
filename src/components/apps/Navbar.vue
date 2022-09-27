@@ -10,7 +10,8 @@
           </li>
           <div class="right">
             <a href="#"
-              ><i class="material-icons left">phone_in_talk</i>+7 966 118 80 89
+              ><i class="material-icons icons left">phone_in_talk</i>+7 966 118
+              80 89
             </a>
           </div>
         </ul>
@@ -28,18 +29,16 @@
       <div class="input-field searchs">
         <input id="search" type="search" required />
         <label class="label-icon" for="search"
-          ><i class="material-icons color">search</i></label
+          ><i class="material-icons">search</i></label
         >
-        <i class="material-icons color">close</i>
+        <i class="material-icons">close</i>
       </div>
-      <router-link to="/user"
-        ><i class="material-icons color">person</i></router-link
-      >
-      <router-link to="/" @click="Menu.close()"
-        ><i class="material-icons color">favorite</i></router-link
+      <router-link to="/user"><i class="material-icons">person</i></router-link>
+      <router-link to="/asessment" @click="Menu.close()"
+        ><i class="material-icons">assessment</i></router-link
       >
       <a href="#"
-        ><i class="material-icons color">phone_in_talk</i>+7 966 118 80 89</a
+        ><i class="material-icons">phone_in_talk</i>+7 966 118 80 89</a
       >
       <li v-for="menu of menus" :key="menu.url" @click="Menu.close()">
         <router-link class="color" :to="menu.url">

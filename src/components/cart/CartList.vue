@@ -1,30 +1,31 @@
 <template>
-  <div class="col s12 m6 l3" v-for="(cart, index) in carts" :key="index">
+  <div class="col s12 m4 l3" v-for="(cart, index) of carts" :key="index">
     <div class="card large">
-      <div class="card-image">
+      <div class="card-image" @click="$router.push('/detail/' + cart.id)">
         <img :src="cart.imagetitle" />
       </div>
       <div class="card-content">
-        <span class="card-title">{{ cart.title }}</span>
+        <span class="card-title" @click="$router.push('/detail/' + cart.id)"
+          >Nomi: {{ cart.title }}</span
+        >
         <h6>Narxi: {{ cart.price }} ₽.</h6>
-        <h6>Dona: {{ cart.number }}</h6>
+        <h5>Dona: {{ cart.number }}</h5>
       </div>
-      <hr />
-      <div class="card-tabs">
+      <div class="card-tabs tabl">
         <ul class="tabs tabs-fixed-width">
           <li class="tab">
-            <a class="waves-effect" @click="Increment(index)"
-              ><i class="material-icons color">add_circle_outline</i></a
+            <a class="waves-effect btns" @click="Increment(index)"
+              ><i class="material-icons icons">add_circle</i></a
             >
           </li>
           <li class="tab">
-            <a class="waves-effect" @click="Decrement(index)"
-              ><i class="material-icons color">remove_circle_outline </i></a
+            <a class="waves-effect btns" @click="Decrement(index)"
+              ><i class="material-icons icons">do_not_disturb_on</i></a
             >
           </li>
           <li class="tab">
-            <a class="waves-effect" @click="Delete(index)"
-              ><i class="material-icons color">delete </i></a
+            <a class="waves-effect btns" @click="Delete(index)"
+              ><i class="material-icons icons">delete </i></a
             >
           </li>
         </ul>

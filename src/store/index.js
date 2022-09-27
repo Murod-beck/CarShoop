@@ -4,6 +4,7 @@ import info from './info';
 import product from './product';
 import category from './category';
 import carts from './carts';
+import asesment from './asesment';
 
 export default createStore({
   state: {
@@ -21,5 +22,5 @@ export default createStore({
     },
   },
   actions: {},
-  modules: { user, info, product, category, carts },
+  modules: { user, info, product, category, carts, asesment },
 });
