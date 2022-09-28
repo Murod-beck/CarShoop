@@ -20,7 +20,7 @@
         v-model.trim="title"
         :class="{ invalid: v$.title.$error && v$.title.required }"
       />
-      <label for="title">Nomi</label>
+      <label class="active" for="title">Nomi</label>
     </div>
 
     <div class="input-field">
@@ -30,7 +30,7 @@
         v-model.trim="price"
         :class="{ invalid: v$.price.$error && v$.price.required }"
       />
-      <label for="price">Narxi</label>
+      <label class="active" for="price">Narxi</label>
     </div>
 
     <div class="input-field">
@@ -40,7 +40,7 @@
         v-model.trim="color"
         :class="{ invalid: v$.color.$error && v$.color.required }"
       />
-      <label for="color">Rangi</label>
+      <label class="active" for="color">Rangi</label>
     </div>
 
     <div class="input-field">
@@ -50,7 +50,7 @@
         v-model.trim="article"
         :class="{ invalid: v$.article.$error && v$.article.required }"
       />
-      <label for="article">Article</label>
+      <label class="active" for="article">Article</label>
     </div>
 
     <div class="input-field">
@@ -60,7 +60,7 @@
         v-model.trim="description"
         :class="{ invalid: v$.description.$error && v$.description.required }"
       ></textarea>
-      <label for="description">Tavsif</label>
+      <label class="active" for="description">Tavsif</label>
     </div>
 
     <div class="file-field">
@@ -168,6 +168,16 @@ export default {
       });
       fileReader.readAsDataURL(files[0]);
       this.imagefile = files[0];
+    },
+  },
+  watch: {
+    product(categoryId) {
+      const { title, price, color, article, description } = this.products.find(
+        (c) => c.id === categoryId
+      );
+      (this.title = title), (this.description = description);
+      (this.price = price), (this.article = article);
+      this.color = color;
     },
   },
   async mounted() {

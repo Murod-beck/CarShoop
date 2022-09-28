@@ -24,6 +24,20 @@
               @click="$router.push('/detail/' + produc.id)"
               >Nomi: {{ produc.title }}</span
             >
+            <div
+              class="chip white-text"
+              :class="{
+                red: produc.color === 'qizil',
+                black: produc.color === 'qora',
+                blue: produc.color === 'kok',
+                green: produc.color === 'yashil',
+                yellow: produc.color === 'sariq',
+                white: produc.color === 'oq',
+                pink: produc.color === 'pushti',
+              }"
+            >
+              {{ produc.color }}
+            </div>
             <h6>{{ produc.price }} ₽.</h6>
             <hr />
             <p>{{ produc.description }}</p>

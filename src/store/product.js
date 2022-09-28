@@ -12,6 +12,7 @@ import {
   uploadBytes,
   updateMetadata,
   getDownloadURL,
+  deleteObject,
 } from 'firebase/storage';
 
 export default {
@@ -22,9 +23,8 @@ export default {
         const sg = getStorage();
         const db = getDatabase();
         const products = await push(dbRef(db, 'product/'), product);
-        const imageExt = image.name.slice(image.name.lastIndexOf('.'));
         const fileDate = await uploadBytes(
-          sgRef(sg, `photo/ ${products.key}${imageExt}`),
+          sgRef(sg, `photo/ ${products.key}`),
           image
         );
         const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
@@ -43,11 +43,9 @@ export default {
         const sg = getStorage();
         const db = getDatabase();
         await update(child(dbRef(db, 'product/'), id), upProduct);
-        const imageExt = images.name.slice(images.name.lastIndexOf('.'));
-        const fileDate = await updateMetadata(
-          sgRef(sg, `photo/ ${id}${imageExt}`),
-          images
-        );
+        const forRef = await sgRef(sg, `photo/ ${id}`);
+        await deleteObject(forRef);
+        const fileDate = await uploadBytes(forRef, images);
         const imageSrc = await getDownloadURL(sgRef(sg, fileDate.ref.fullPath));
         await update(child(dbRef(db, `product/`), id), {
           imagetitle: imageSrc,
