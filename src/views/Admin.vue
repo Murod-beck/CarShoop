@@ -18,34 +18,7 @@
             >
           </div>
         </div>
-        <form class="card auth-card">
-          <div class="card-title center">
-            <i class="material-icons">category</i>
-          </div>
-
-          <div class="input-field">
-            <input
-              id="input_texts"
-              type="text"
-              v-model.trim="category"
-              class="validate"
-            />
-            <label for="input_texts">Categorya</label>
-          </div>
-
-          <div class="card-action">
-            <div>
-              <button
-                class="btn waves-effect waves-light auth-submit"
-                type="submit"
-                @click.prevent="addCategoryies"
-              >
-                Yuklash
-                <i class="material-icons right">send</i>
-              </button>
-            </div>
-          </div>
-        </form>
+        <Categories :updates="update" />
       </div>
       <div class="col s12 m12 l6">
         <SetProduct v-if="update" />
@@ -58,28 +31,18 @@
 <script>
 import SetProduct from '@/components/product/SetProduct.vue';
 import UpdateProduct from '@/components/product/UpdateProduct.vue';
+import Categories from '@/components/product/Categories.vue';
 export default {
   name: 'Amin',
   created() {},
   data() {
     return {
       update: true,
-      category: '',
     };
   },
   props: {},
-  methods: {
-    async addCategoryies() {
-      const categories = this.category;
-      try {
-        await this.$store.dispatch('addCategory', categories);
-        this.$message('Categorya muvaffaqiyatli yuklandi');
-        this.category = '';
-        this.v$.$reset();
-      } catch {}
-    },
-  },
-  components: { SetProduct, UpdateProduct },
+  methods: {},
+  components: { SetProduct, UpdateProduct, Categories },
 };
 </script>
 
