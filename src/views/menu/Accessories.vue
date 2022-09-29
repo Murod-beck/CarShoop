@@ -22,9 +22,9 @@
             <span
               class="card-title"
               @click="$router.push('/detail/' + produc.id)"
-              >Nomi: {{ produc.title }}</span
+              >Nomi.....{{ produc.title }}</span
             >
-            <h6>{{ produc.price }} ₽.</h6>
+            <h6>Narxi....{{ produc.price }} ₽.</h6>
             <hr />
             <p>{{ produc.description }}</p>
           </div>
@@ -71,7 +71,7 @@ export default {
     const category = await this.$store.dispatch('fetchCategory');
     const products = await this.$store.dispatch('fetchProduct');
     products.map((pro) => {
-      if (pro.categoryId === category[1].id) {
+      if (pro.categoryId === category[4].id) {
         this.product.push(pro);
       }
     });

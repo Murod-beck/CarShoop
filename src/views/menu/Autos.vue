@@ -22,23 +22,9 @@
             <span
               class="card-title"
               @click="$router.push('/detail/' + produc.id)"
-              >Nomi: {{ produc.title }}</span
+              >Nomi.....{{ produc.title }}</span
             >
-            <div
-              class="chip white-text"
-              :class="{
-                red: produc.color === 'qizil',
-                black: produc.color === 'qora',
-                blue: produc.color === 'kok',
-                green: produc.color === 'yashil',
-                yellow: produc.color === 'sariq',
-                white: produc.color === 'oq',
-                pink: produc.color === 'pushti',
-              }"
-            >
-              {{ produc.color }}
-            </div>
-            <h6>{{ produc.price }} ₽.</h6>
+            <h6>Narxi....{{ produc.price }} ₽.</h6>
             <hr />
             <p>{{ produc.description }}</p>
           </div>
@@ -85,7 +71,7 @@ export default {
     const category = await this.$store.dispatch('fetchCategory');
     const products = await this.$store.dispatch('fetchProduct');
     products.map((pro) => {
-      if (pro.categoryId === category[0].id) {
+      if (pro.categoryId === category[2].id) {
         this.product.push(pro);
       }
     });

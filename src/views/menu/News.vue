@@ -22,9 +22,9 @@
             <span
               class="card-title"
               @click="$router.push('/detail/' + produc.id)"
-              >Nomi: {{ produc.title }}</span
+              >Nomi.....{{ produc.title }}</span
             >
-            <h6>{{ produc.price }} ₽.</h6>
+            <h6>Narxi....{{ produc.price }} ₽.</h6>
             <hr />
             <p>{{ produc.description }}</p>
           </div>

@@ -12,7 +12,7 @@
             </div>
             <div class="col s12 m7">
               <div class="card-content">
-                <span class="card-title">Nomi: {{ produc.title }}</span>
+                <span class="card-title">Nomi........{{ produc.title }}</span>
                 <div
                   class="chip white-text"
                   :class="{
@@ -23,12 +23,13 @@
                     yellow: produc.color === 'sariq',
                     white: produc.color === 'oq',
                     pink: produc.color === 'pushti',
+                    brown: produc.color === 'jigarrang',
                   }"
                 >
                   {{ produc.color }}
                 </div>
-                <h6>Article: {{ produc.article }}</h6>
-                <span class="card-title">{{ produc.price }} ₽</span>
+                <h6>Article........{{ produc.article }}</h6>
+                <span class="card-title">Narxi.......{{ produc.price }} ₽</span>
               </div>
               <div class="card-tabs">
                 <ul class="tabs tabs-fixed-width">
@@ -38,7 +39,9 @@
                     >
                   </li>
                   <li class="tab">
-                    <a class="waves-effect btns"
+                    <a
+                      class="waves-effect btns"
+                      @click.once="addAsessment(produc)"
                       ><i class="material-icons icons">assessment</i></a
                     >
                   </li>
@@ -71,6 +74,9 @@ export default {
   methods: {
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
+    },
+    addAsessment(produc) {
+      this.$store.dispatch('addAsessments', produc);
     },
   },
   async mounted() {
