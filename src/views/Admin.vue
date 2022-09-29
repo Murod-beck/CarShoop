@@ -8,7 +8,7 @@
           </div>
           <div class="collection">
             <a href="#yuklash" class="collection-item" @click="update = true"
-              >Yuklash</a
+              >Yaratish</a
             >
             <a
               href="#tahrirlash"
@@ -18,10 +18,11 @@
             >
           </div>
         </div>
-        <Categories :updates="update" />
+        <EditCategory v-if="update" />
+        <UpdateCategory v-else />
       </div>
       <div class="col s12 m12 l6">
-        <SetProduct v-if="update" />
+        <EditProduct v-if="update" />
         <UpdateProduct v-else />
       </div>
     </div>
@@ -29,12 +30,12 @@
 </template>
 
 <script>
-import SetProduct from '@/components/product/SetProduct.vue';
+import EditCategory from '@/components/product/EditCategory.vue';
+import UpdateCategory from '@/components/product/UpdateCategory.vue';
+import EditProduct from '@/components/product/EditProduct.vue';
 import UpdateProduct from '@/components/product/UpdateProduct.vue';
-import Categories from '@/components/product/Categories.vue';
 export default {
-  name: 'Amin',
-  created() {},
+  name: 'Admin',
   data() {
     return {
       update: true,
@@ -42,7 +43,12 @@ export default {
   },
   props: {},
   methods: {},
-  components: { SetProduct, UpdateProduct, Categories },
+  components: {
+    EditCategory,
+    UpdateCategory,
+    EditProduct,
+    UpdateProduct,
+  },
 };
 </script>
 

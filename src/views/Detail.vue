@@ -33,12 +33,8 @@
               <div class="card-tabs">
                 <ul class="tabs tabs-fixed-width">
                   <li class="tab">
-                    <a class="waves-effect btns"
-                      ><i
-                        @click.once="addCart(produc)"
-                        class="material-icons icons"
-                        >add_shopping_cart</i
-                      ></a
+                    <a class="waves-effect btns" @click.once="addCart(produc)"
+                      ><i class="material-icons icons">add_shopping_cart</i></a
                     >
                   </li>
                   <li class="tab">

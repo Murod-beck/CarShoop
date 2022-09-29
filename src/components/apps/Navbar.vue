@@ -33,7 +33,9 @@
         >
         <i class="material-icons">close</i>
       </div>
-      <router-link to="/user"><i class="material-icons">person</i></router-link>
+      <router-link to="/user" @click="Menu.close()"
+        ><i class="material-icons">person</i></router-link
+      >
       <router-link to="/asessment" @click="Menu.close()"
         ><i class="material-icons">assessment</i></router-link
       >

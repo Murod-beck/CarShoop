@@ -5,12 +5,12 @@ import {
   onValue,
   update,
   child,
+  remove,
 } from 'firebase/database';
 import {
   getStorage,
   ref as sgRef,
   uploadBytes,
-  updateMetadata,
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage';
@@ -50,6 +50,17 @@ export default {
         await update(child(dbRef(db, `product/`), id), {
           imagetitle: imageSrc,
         });
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async deleteProduct({ commit, dispatch }, deletProduct) {
+      try {
+        const sg = getStorage();
+        const db = getDatabase();
+        await remove(child(dbRef(db, 'product/'), deletProduct));
+        await deleteObject(sgRef(sg, `photo/ ${deletProduct}`));
       } catch (e) {
         commit('setError', e);
         throw e;

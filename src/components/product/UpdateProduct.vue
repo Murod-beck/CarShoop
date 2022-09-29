@@ -79,17 +79,29 @@
       <img :src="imageUrl" width="150" />
     </div>
 
-    <div class="card-action">
-      <div>
-        <button
-          class="btn waves-effect waves-light auth-submit"
-          type="submit"
-          @click.prevent="updateProducts"
-        >
-          Tahrirlash
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
+    <div class="card-tabs tabl">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab">
+          <button
+            class="btn waves-effect waves-light auth-submit"
+            type="submit"
+            @click.prevent="updateProducts"
+          >
+            Tahrirlash
+            <i class="material-icons right">edit</i>
+          </button>
+        </li>
+        <li class="tab">
+          <button
+            class="btn waves-effect waves-light auth-submit"
+            type="submit"
+            @click.prevent="deleteProducts"
+          >
+            O'chirish
+            <i class="material-icons right">delete</i>
+          </button>
+        </li>
+      </ul>
     </div>
   </form>
 </template>
@@ -145,6 +157,19 @@ export default {
       try {
         await this.$store.dispatch('updateProduct', upProduct);
         this.$message('Yangilash muvaffaqiyatli yangilandi!');
+        (this.title = ''),
+          (this.price = ''),
+          (this.color = ''),
+          (this.article = ''),
+          (this.description = ''),
+          (this.imagetitle = '');
+        this.v$.$reset();
+      } catch (e) {}
+    },
+    async deleteProducts() {
+      try {
+        await this.$store.dispatch('deleteProduct', this.product);
+        this.$message("Producta muvaffaqiyatli o'chirildi!");
         (this.title = ''),
           (this.price = ''),
           (this.color = ''),

@@ -42,7 +42,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Filters from '@/components/product/Filters.vue';
 export default {
   name: 'Asesment',
   data() {
@@ -61,7 +60,7 @@ export default {
   computed: {
     ...mapGetters(['asessment']),
   },
-  components: { Filters },
+  components: {},
 };
 </script>
 

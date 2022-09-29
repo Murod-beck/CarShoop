@@ -1,4 +1,11 @@
-import { ref, push, getDatabase, onValue } from 'firebase/database';
+import {
+  ref,
+  push,
+  getDatabase,
+  onValue,
+  remove,
+  child,
+} from 'firebase/database';
 
 export default {
   state: {},
@@ -9,6 +16,15 @@ export default {
       try {
         const db = getDatabase();
         await push(ref(db, 'category/'), categories);
+      } catch (e) {
+        commit('setError', e);
+        throw e;
+      }
+    },
+    async deleteCategory({ commit, dispatch }, categories) {
+      try {
+        const db = getDatabase();
+        await remove(child(ref(db, 'category/'), categories));
       } catch (e) {
         commit('setError', e);
         throw e;

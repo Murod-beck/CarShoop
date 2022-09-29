@@ -5,7 +5,7 @@
         <div class="collection-header center">
           <h4>Sedina Chexollari</h4>
         </div>
-        <Filters />
+        <FilterProduct />
       </div>
       <Loader v-if="loading" />
       <div
@@ -63,8 +63,8 @@
 </template>
 
 <script>
-import Filters from '@/components/product/Filters.vue';
 import Loader from '@/components/apps/Loader.vue';
+import FilterProduct from '@/components/product/FilterProduct.vue';
 export default {
   name: 'Cases',
   data() {
@@ -91,7 +91,7 @@ export default {
     });
     this.loading = false;
   },
-  components: { Filters, Loader },
+  components: { Loader, FilterProduct },
 };
 </script>
 
