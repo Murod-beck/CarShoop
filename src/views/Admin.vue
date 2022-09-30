@@ -19,11 +19,11 @@
           </div>
         </div>
         <EditCategory v-if="update" />
-        <UpdateCategory v-else />
+        <UpdateCategory v-else @selectCategory="selecCategory" />
       </div>
       <div class="col s12 m12 l6">
         <EditProduct v-if="update" />
-        <UpdateProduct v-else />
+        <UpdateProduct v-else :CategorId="categoryId" />
       </div>
     </div>
   </div>
@@ -39,10 +39,15 @@ export default {
   data() {
     return {
       update: true,
+      categoryId: '',
     };
   },
   props: {},
-  methods: {},
+  methods: {
+    selecCategory(idCategory) {
+      this.categoryId = idCategory;
+    },
+  },
   components: {
     EditCategory,
     UpdateCategory,

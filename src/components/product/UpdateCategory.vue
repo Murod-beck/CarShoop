@@ -6,7 +6,11 @@
       </div>
 
       <div class="input-field">
-        <select ref="select" v-model="categorya">
+        <select
+          ref="select"
+          v-model="categorya"
+          @change="selecCategory(categorya)"
+        >
           <option
             v-for="categor of categories"
             :key="categor"
@@ -45,18 +49,22 @@ export default {
     };
   },
   props: {},
+  emits: ['selectCategory'],
   methods: {
     deletCategoryies() {
       this.$store.dispatch('deleteCategory', this.categorya);
       this.$message("Categorya muvaffaqiyatli o'chirildi");
     },
+    selecCategory(categorya) {
+      this.$emit('selectCategory', categorya);
+    },
   },
+
   async mounted() {
     this.categories = await this.$store.dispatch('fetchCategory');
     if (this.categories.length) {
       this.categorya = this.categories[0].id;
     }
-
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);
     }, 0);
@@ -69,4 +77,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
