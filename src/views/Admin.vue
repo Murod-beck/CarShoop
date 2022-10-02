@@ -23,7 +23,7 @@
       </div>
       <div class="col s12 m12 l6">
         <EditProduct v-if="update" />
-        <UpdateProduct v-else :CategorId="categoryId" />
+        <UpdateProduct v-else :catId="catId" />
       </div>
     </div>
   </div>
@@ -39,13 +39,13 @@ export default {
   data() {
     return {
       update: true,
-      categoryId: '',
+      catId: null,
     };
   },
   props: {},
   methods: {
-    selecCategory(idCategory) {
-      this.categoryId = idCategory;
+    selecCategory(catId) {
+      this.catId = catId;
     },
   },
   components: {

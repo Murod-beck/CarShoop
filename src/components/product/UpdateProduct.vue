@@ -127,17 +127,46 @@ export default {
       imageUrl: '',
     };
   },
-  validations() {
-    return {
-      title: { required },
-      price: { required },
-      color: { required },
-      article: { required },
-      description: { required },
-      imagetitle: { required },
-    };
+  watch: {
+    product(categoryId) {
+      const { title, price, color, article, description } = this.products.find(
+        (c) => c.id === categoryId
+      );
+      (this.title = title), (this.description = description);
+      (this.price = price), (this.article = article);
+      this.color = color;
+    },
   },
-  props: {},
+  created() {
+    this.product = this.catId;
+  },
+  async mounted() {
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select);
+    }, 0);
+
+    const producta = await this.$store.dispatch('fetchProduct');
+    console.log(this.catId);
+    producta.map((index) => {
+      if (index.categoryId === this.catId) {
+        this.products.push(index);
+      }
+    });
+    if (this.products.length) {
+      this.product = this.products[0].id;
+    }
+  },
+  destroyed() {
+    if (this.select && this.select.destroy) {
+      this.select.destroy();
+    }
+  },
+  props: {
+    catId: {
+      type: Array,
+      required: true,
+    },
+  },
   methods: {
     async updateProducts() {
       this.v$.$validate();
@@ -195,30 +224,15 @@ export default {
       this.imagefile = files[0];
     },
   },
-  watch: {
-    product(categoryId) {
-      const { title, price, color, article, description } = this.products.find(
-        (c) => c.id === categoryId
-      );
-      (this.title = title), (this.description = description);
-      (this.price = price), (this.article = article);
-      this.color = color;
-    },
-  },
-  async mounted() {
-    setTimeout(() => {
-      this.select = M.FormSelect.init(this.$refs.select);
-    }, 0);
-
-    this.products = await this.$store.dispatch('fetchProduct');
-    if (this.products.length) {
-      this.product = this.products[0].id;
-    }
-  },
-  destroyed() {
-    if (this.select && this.select.destroy) {
-      this.select.destroy();
-    }
+  validations() {
+    return {
+      title: { required },
+      price: { required },
+      color: { required },
+      article: { required },
+      description: { required },
+      imagetitle: { required },
+    };
   },
 };
 </script>
