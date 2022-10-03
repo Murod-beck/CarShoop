@@ -5,7 +5,7 @@
     </div>
 
     <div class="input-field">
-      <select ref="select" v-model="product">
+      <select ref="select" v-model="product" :key="selects">
         <option v-for="produc of products" :key="produc.id" :value="produc.id">
           {{ produc.title }}
         </option>
@@ -117,6 +117,7 @@ export default {
       select: null,
       product: null,
       products: [],
+      producta: [],
       title: '',
       price: '',
       color: '',
@@ -127,34 +128,38 @@ export default {
       imageUrl: '',
     };
   },
+  computed: {
+    selects() {
+      return this.products;
+    },
+  },
   watch: {
-    product(categoryId) {
+    selects() {
+      console.log('ok');
+    },
+    product(productId) {
       const { title, price, color, article, description } = this.products.find(
-        (c) => c.id === categoryId
+        (c) => c.id === productId
       );
       (this.title = title), (this.description = description);
       (this.price = price), (this.article = article);
       this.color = color;
     },
   },
-  created() {
-    this.product = this.catId;
-  },
   async mounted() {
-    setTimeout(() => {
-      this.select = M.FormSelect.init(this.$refs.select);
-    }, 0);
-
     const producta = await this.$store.dispatch('fetchProduct');
-    console.log(this.catId);
     producta.map((index) => {
       if (index.categoryId === this.catId) {
         this.products.push(index);
       }
+      if (this.products.length) {
+        this.product = this.products[0].id;
+      }
     });
-    if (this.products.length) {
-      this.product = this.products[0].id;
-    }
+
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select);
+    }, 0);
   },
   destroyed() {
     if (this.select && this.select.destroy) {

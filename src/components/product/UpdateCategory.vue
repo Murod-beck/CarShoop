@@ -6,11 +6,7 @@
       </div>
 
       <div class="input-field">
-        <select
-          ref="select"
-          v-model="categorya"
-          @change="selecCategory(categorya)"
-        >
+        <select ref="select" v-model="categorya" @change="selecCategory">
           <option
             v-for="categor of categories"
             :key="categor"
@@ -55,8 +51,8 @@ export default {
       this.$store.dispatch('deleteCategory', this.categorya);
       this.$message("Categorya muvaffaqiyatli o'chirildi");
     },
-    selecCategory(categorya) {
-      this.$emit('selectCategory', categorya);
+    selecCategory() {
+      this.$emit('selectCategory', this.categorya);
     },
   },
 
