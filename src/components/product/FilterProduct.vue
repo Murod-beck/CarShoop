@@ -1,19 +1,11 @@
 <template>
   <h6 class="color">Saralash</h6>
-  <select class="browser-default">
+  <select ref="select" v-model="producta">
     <option value="" disabled selected>Yangilari</option>
-    <option value="1" @change="sortAZ">Nomi A > Z</option>
-    <option value="3">Reyting A > Z</option>
-    <option value="2">Arzondan > Qimmat</option>
+    <option>{{ producta }}</option>
   </select>
-  <p>
-    <label>
-      <input type="checkbox" value="F" v-model="producta" />
-      <span>Red</span>
-    </label>
-  </p>
   <h6 class="color">Ko'rsatish</h6>
-  <select class="browser-default color">
+  <select ref="selects">
     <option value="" disabled selected>10</option>
     <option value="2">20</option>
     <option value="3">30</option>
@@ -25,30 +17,37 @@ export default {
   name: 'Filters',
   data() {
     return {
-      producta: [],
+      select: null,
+      producta: '',
     };
   },
   props: ['products'],
   methods: {
     sortAZ() {
-      this.$emit('producta', filterData());
+      console.log(filterData());
     },
   },
   computed: {
     filterData() {
-      let data = [];
-      if (this.producta.length) {
-        data = this.products.filter(
-          (x) => this.producta.indexOf(x.title.toString()) != -1
-        );
-      } else {
-        data = this.products;
-      }
-      return data;
+      let comp = this.producta;
+      return this.products.filter(function (elem) {
+        if (comp === '') return true;
+        else return elem.producta.indexOf(comp) > -1;
+      });
     },
   },
   mounted() {
-    M.FormSelect.init(this.$refs.selec);
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select);
+    }, 0);
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.selects);
+    }, 0);
+  },
+  destroyed() {
+    if (this.select && this.select.destroy) {
+      this.select.destroy();
+    }
   },
 };
 </script>
