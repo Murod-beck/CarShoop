@@ -5,7 +5,7 @@
         <div class="collection-header center">
           <h4>Sedina Chexollari</h4>
         </div>
-        <FilterProduct />
+        <FilterProduct :products="product" @producta="productas" />
       </div>
       <Loader v-if="loading" />
       <div
@@ -60,6 +60,10 @@ export default {
     };
   },
   methods: {
+    productas(pro) {
+      console.log(pro);
+    },
+
     addCart(produc) {
       this.$store.dispatch('addCarts', produc);
     },
