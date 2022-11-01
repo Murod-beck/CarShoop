@@ -5,7 +5,7 @@
         <div class="collection-header center">
           <h4>Sedina Chexollari</h4>
         </div>
-        <FilterProduct />
+        <FilterProduct :products="product" />
       </div>
       <Loader v-if="loading" />
       <div
