@@ -17,13 +17,10 @@
 <script>
 export default {
   name: 'Filters',
-  created() {},
   data() {
     return {};
   },
-  mounted() {
-    M.FormSelect.init(this.$refs.selec);
-  },
+
   props: {},
   methods: {},
 };
