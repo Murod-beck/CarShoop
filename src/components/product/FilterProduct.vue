@@ -1,22 +1,74 @@
 <template>
-  <h6 class="color">Saralash</h6>
-  <select class="browser-default">
-    <option value="" disabled selected>Yangilari</option>
-    <option value="minPrice">Arzondan</option>
-    <option value="maxPrice">Qimmatidan</option>
-  </select>
-  <h6 class="color">Ko'rsatish</h6>
-  <select class="browser-default">
-    <option value="" disabled selected>10</option>
-    <option value="2">20</option>
-    <option value="3">30</option>
-  </select>
   <table>
     <tr>
-      <td><a class="btn" @click="sortParam = 'title'">Title</a></td>
-      <td><a class="btn" @click="sortParam = 'price'">Price</a></td>
+      <td>
+        <h6 class="color">Saralash</h6>
+        <label>
+          <input type="radio" name="sort" @change="sortMin" />
+          <span>Arzonidan</span>
+        </label>
+      </td>
     </tr>
-    <tr v-for="phone in sortedList" :key="phone">
+    <tr>
+      <td>
+        <label>
+          <input type="radio" name="sort" @change="sortMax" />
+          <span>Qimmatidan</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <input type="radio" name="sorts" @change="sortA" />
+          <span>A---Z</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <input type="radio" name="sorts" @change="sortZ" />
+          <span>Z---A</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a class="waves-effect waves-light" @click="refresh"
+          ><i class="material-icons">refresh</i></a
+        >
+        <span>Refresh</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h6 class="color">Ko'rsatish</h6>
+        <label>
+          <input type="radio" name="pagination" />
+          <span>10</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <input type="radio" name="pagination" />
+          <span>20</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>
+          <input type="radio" name="pagination" />
+          <span>30</span>
+        </label>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr v-for="phone in products" :key="phone">
       <td>{{ phone.title }}</td>
       <td>{{ phone.price }}</td>
     </tr>
@@ -32,25 +84,36 @@ export default {
     };
   },
   props: ['products'],
-  methods: {},
-  computed: {
-    sortedList() {
-      let sortTitle = function (d1, d2) {
-        return d1.title.toLowerCase() > d2.title.toLowerCase() ? 1 : -1;
-      };
-      let sortPrice = function (d1, d2) {
-        return d1.price > d2.price ? 1 : -1;
-      };
-      switch (this.sortParam) {
-        case 'title':
-          return this.products.sort(sortTitle);
-        case 'price':
-          return this.products.sort(sortPrice);
-        default:
-          return this.products;
-      }
+  methods: {
+    sortMin() {
+      return this.products.sort((a, b) => {
+        return a.price - b.price;
+      });
+    },
+    sortMax() {
+      return this.products.sort((a, b) => {
+        return b.price - a.price;
+      });
+    },
+    sortA() {
+      return this.products.sort((a, b) => {
+        if (a.title < b.title) return -1;
+        if (a.title > b.title) return 1;
+        return 0;
+      });
+    },
+    sortZ() {
+      return this.products.sort((a, b) => {
+        if (a.title > b.title) return -1;
+        if (a.title < b.title) return 1;
+        return 0;
+      });
+    },
+    refresh() {
+      return this.products;
     },
   },
+  computed: {},
 };
 </script>
 
