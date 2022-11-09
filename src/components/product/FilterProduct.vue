@@ -67,12 +67,6 @@
       </td>
     </tr>
   </table>
-  <table>
-    <tr v-for="phone in products" :key="phone">
-      <td>{{ phone.title }}</td>
-      <td>{{ phone.price }}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
@@ -110,6 +104,7 @@ export default {
       });
     },
     refresh() {
+      console.log(this.products);
       return this.products;
     },
   },
